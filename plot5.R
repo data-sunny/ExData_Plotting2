@@ -1,4 +1,4 @@
-
+# plot5.R
 # read data
   nei <- readRDS("summarySCC_PM25.rds")
   scc <- readRDS("Source_Classification_Code.rds")
@@ -23,6 +23,14 @@
 # make plot
 
   png("plot5.png", width=480, height=480, units="px") # open png file
-  barplot(Total_Emissions, xlab="Year", ylab = "Emissions", main = "Total Emissions from motor vehicle sources
+  x_data <- barplot(Total_Emissions, xlab="Year", ylab = "Emissions", main = "Total Emissions from motor vehicle sources
         (1999 to 2008) in Baltimore")
+  lines(x=x_data, y=Total_Emissions, col="blue")
   dev.off()   # close png filedevice
+  
+  # OR plot using ggplot2
+  #install.packages("ggplot2"); library(ggplot2)
+  #gg <- ggplot( bm_veh, aes(year, Emissions ) ) # fill declaration give colors to types
+  #gg + geom_bar(stat="identity")  + coord_cartesian(xlim=c(1996,2011)) + theme(legend.title=element_blank()) +
+  #  labs(title = "Total Emissions from motor vehicle sources (1999 to 2008) in Baltimore")
+  

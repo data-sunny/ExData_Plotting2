@@ -1,3 +1,4 @@
+# plot6.R
 # read data
 nei <- readRDS("summarySCC_PM25.rds")
 scc <- readRDS("Source_Classification_Code.rds")
@@ -31,28 +32,29 @@ Total_Emissions_Los_Angeles_nrmlzd <- Total_Emissions_Los_Angeles/Total_Emission
 
 # make plot
 png("plot6.png", width=840, height=840, units="px") # open png file
-par( mfrow=c(2,2), mar=c(7,5,7,5) )
+par( mfrow=c(2,2), mar=c(5,5,7,5) )
 
 Year <- c(1999, 2002, 2005, 2008)
 plot(Year, Total_Emissions_Baltimore_nrmlzd, type='l',xlab="Year", ylab=" Change in Emission levels", ylim = c(0., 1.5) )
   title(  main= "Comparison of Emission levels Change - Using 1999 values as reference")
-  legend("topright", legend = c("Baltimore", "Los Angeles"), col = c("red", "blue"), lty = c(1,1))
-  lines(Year, Total_Emissions_Baltimore_nrmlzd, col = "red", type="l")
-  lines(Year, Total_Emissions_Los_Angeles_nrmlzd, col = "blue", type="l")
+  legend("topright", legend = c("Baltimore", "Los Angeles"), col = c("green", "yellow"), lty = c(1,1))
+  lines(Year, Total_Emissions_Baltimore_nrmlzd, col = "green", type="l")
+  lines(Year, Total_Emissions_Los_Angeles_nrmlzd, col = "yellow", type="l")
   grid()
 
-barplot(Total_Emissions_Baltimore_nrmlzd, xlab="Year", ylab = "Emissions", main = "Normalized Emissions from motor vehicle sources
-        in Baltimore - using 1999 values as reference")
+barplot(Total_Emissions_Baltimore, xlab="Year", ylab = "Emissions", main = "Total Emissions from motor vehicle sources
+        in Baltimore", col= "green")
+barplot(Total_Emissions_Los_Angeles, xlab="Year", ylab = "Emissions", main = "Total Emissions from motor vehicle sources
+        in Los Angeles", col = "yellow")
 
-barplot(Total_Emissions_Los_Angeles_nrmlzd, xlab="Year", ylab = "Emissions", main = "Normalized Emissions from motor vehicle sources
-        in Los Angeles - using 1999 values as reference", col="yellow")
 dev.off()   # close png filedevice
 
-# ================ the plots below plot absolute values =============
-#barplot(Total_Emissions_Baltimore, xlab="Year", ylab = "Emissions", main = "Total Emissions from motor vehicle sources
-#        in Baltimore")
-#barplot(Total_Emissions_Los_Angeles, xlab="Year", ylab = "Emissions", main = "Total Emissions from motor vehicle sources
-#        in Los Angeles", col = "yellow")
+# ================ the plots below plot Normalized values =============
+#barplot(Total_Emissions_Baltimore_nrmlzd, xlab="Year", ylab = "Emissions", main = "Normalized Emissions from motor vehicle sources
+#        in Baltimore - using 1999 values as reference")
 
+#barplot(Total_Emissions_Los_Angeles_nrmlzd, xlab="Year", ylab = "Emissions", main = "Normalized Emissions from motor vehicle sources
+#        in Los Angeles - using 1999 values as reference", col="yellow")
 
+#dev.off()
 
